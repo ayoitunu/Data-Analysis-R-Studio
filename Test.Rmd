@@ -1,0 +1,85 @@
+title: "Test"
+author: "Emmanuel Akinbode"
+date: "10/18/2019"
+output:
+  pdf_document: default
+  html_document: default
+cohort: Cohort 1
+---
+
+##Question 1. Write R program to create a matrix taking a given vector of numbers as input. Display the matrix
+
+```{r}
+Ques1 <- matrix(1:9, nrow = 3, ncol = 3, byrow = TRUE)
+Ques1
+
+```
+
+##Question2. Write R program to create “two” 2x3 matrix and add, subtract, multiply the matrices. 
+```{r}
+mat1 <- matrix(1:6, nrow=2, ncol = 3, byrow = TRUE)
+mat2 <- matrix(7:12, nrow = 2, ncol = 3, byrow = TRUE)
+
+add<- mat1 + mat2
+sub<- mat2 - mat1
+mult<- mat1 * mat2
+mat1
+mat2
+add
+sub
+mult
+```
+
+##Question 3: Write R program to access the element at 3rd column and 2nd row of a given matrix.
+```{r}
+access_mat1<- mat1[2,3]
+access_mat2<- mat2[2,3]
+access_mat1
+access_mat2
+
+```
+
+##Question 4: Write R program to create vector of numeric, complex, logical and character types of length 
+
+```{r}
+number<- c(1:6)
+numeric_vector<- as.numeric(number)
+complex_vector<-as.complex(number)
+logical_vector<-as.logical(number)
+char_vector<-as.character(number)
+
+numeric_vector
+complex_vector
+logical_vector
+char_vector
+
+```
+
+##Question 5: Write R program to multiply two vectors of integer type of length 3
+```{r}
+int1 <- 1:3
+int2 <- 4:6
+vect <- int1 * int2
+vect
+```
+
+##Question 6: Load the Tumor data set into R using the read.table() function.
+
+```{r}
+tumor<- read.table(file.choose(), header = T, sep = "\t")
+View(tumor)
+tumor
+```
+
+
+Question 7: Using the data in Q6, Plot the scatter plot of the variables “time”  and “futime “, with "time" on the y-axis and "futime" on the x-axis.  Format your plot by putting title on the plot.
+
+```{r}
+
+plot(tumor$futime, tumor$time, main="Relationship between Futime and Time",xlab="futime", ylab="time")
+```
+
+#3Question 8:  Using the data in Q6, Carry out histogram plot of the “time” variable and Title you plot
+```{r}
+hist(tumor$time,  main="Histogram showing time", ylab="time")
+```
