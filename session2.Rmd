@@ -1,0 +1,137 @@
+---
+title: "Session2"
+author: "Emmanuel Akinbode"
+date: "10/30/2019"
+output: html_document
+---
+
+
+```{r}
+library(readxl)
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+dta<-read_excel("data/mbta.xlsx",skip=1,range=cell_cols(2:60))
+view(dta)
+```
+
+```{r}
+dta_tidy<- dta %>% gather('2007-01':'2011-10', key="year", value="passengers")
+View(dta_tidy)
+```
+
+```{r}
+dta_tidy1<- dta_tidy %>% separate(year, into= c("year", "months"))
+View(dta_tidy)
+head(dta_tidy1)
+```
+
+```{r}
+dta_tidy2 <- dta_tidy1 %>% spread(mode, passengers)
+View(dta_tidy2)
+head(dta_tidy2)
+```
+
+```{r}
+dta_tidy3<-dta_tidy2 %>% .[,c(1:2,6:8)]
+head(dta_tidy3)
+```
+
+```{r}
+dta_tidy4<- dta_tidy3 %>% gather('Commuter Rail':'Light Rail', key="rail_type", value="passengers")
+View(dta_tidy4)
+dta_tidy4
+```
+
+# Data transformation using dplyr
+
+```{r}
+library(hflights)
+data("hflights")
+f1<-filter(hflights, Year==2011, Month==2)
+f1
+```
+
+```{r}
+fil<-filter(hflights, Dest %in% c("FLL","IAH"))
+(fil)
+```
+
+```{r}
+fil2<- filter(hflights, between(Distance, 224,944))[,11:16]
+fil2
+```
+
+
+```{r}
+fil3<- filter(hflights, Year == 2011, Month== 4)
+fil3
+```
+
+```{r}
+fil4<- filter(hflights, UniqueCarrier %in% c("AA", "WN"))
+fil4
+```
+
+
+```{r}
+arr_1<- arrange(hflights, Year, Month)
+arr_1
+```
+
+```{r}
+arr_2<-arrange(hflights, desc(ArrDelay))[,10:15]
+arr_2
+```
+
+```{r}
+sel1<-select(hflights, Year, Month, FlightNum, AirTime)[1:4]
+sel1
+
+```
+
+```{r}
+sel2<-select(hflights, tail_num = TailNum, ArrTime30=ArrTime)
+sel2
+```
+
+```{r}
+sel3<- select(hflights, starts_with("Dep"), starts_with("Arr"))
+sel3
+```
+
+```{r}
+vars<-c("Year", "Month", "DayOfMonth", "ArrTime")
+s_1 <- select(hflights, one_of(vars))
+head(s_1)[1:6,]
+```
+
+```{r}
+hflights %>%
+  select(ends_with("Delay"), Distance, AirTime) %>%
+  mutate(time_again = ArrDelay - DepDelay,
+         speed = Distance/AirTime * 60)
+  
+```
+
+```{r}
+summarise(hflights, Delay = sum(DepDelay, na.rm= TRUE))
+```
+      
+```{r}
+hflights %>% group_by(Year, Month, DayofMonth, DayOfWeek) %>% 
+  summarise(delay = mean(DepDelay, na.rm = TRUE))
+```
+
+```{r}
+hflights %>% select(Year, Month,DepDelay) %>% 
+  arrange(Month)
+```
+
+```{r}
+hflights %>% group_by(Year, Month, DayofMonth) %>% summarise(DepDelay =n())
+```
