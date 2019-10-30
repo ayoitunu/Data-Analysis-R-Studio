@@ -1,0 +1,192 @@
+---
+title: "Session1"
+author: "Emmanuel Akinbode"
+date: "10/30/2019"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r}
+who<-read.table(file.choose(),header = T, sep = ",", dec = ".")
+who
+```
+
+```{r}
+who<-read.table("data/who_suicide_statistics.csv",header = T, sep = ",", dec = ".")
+
+```
+
+```{r}
+who<-read.table("data/who_suicide_statistics.csv",header = F, sep = ",", dec = ".")
+
+```
+
+```{r}
+auto<-read.table(file.choose(),header = F, sep = ",", dec = ".")
+auto
+```
+###use this to add heading to the auto file above.
+```{r}
+names(auto)<-c(c("sym","norm","make","f_type","asp","num_doors","body_style","drive_wheel","engine_loc","wheel_base","length","width","height","curb_weight","engine_type","num_cyl","eng_size","fuel_type","bore","stroke","comp","horse","peak_rpm","city_mpg","highway","price"))
+```
+
+```{r}
+head(who)[1:10,1:3]
+```
+
+```{r}
+View(who)
+```
+
+```{r}
+View(auto)
+```
+
+```{r}
+potato<-read.table(file.choose(),header = F, sep = "\t")
+potato
+```
+
+```{r}
+potato<-read.table("data/potatoes.txt",header = F, sep = "\t")
+```
+
+```{r}
+View(potato)
+```
+
+```{r}
+names(potato)<-c(c("Data1","Data2","Data3","Data4","Data5","Data6","Data7","Data8"))
+```
+
+```{r}
+library(readxl)
+```
+
+```{r}
+sht1 <- read_excel("data/Employees.xlsx", sheet = 1)
+sht2 <- read_excel("data/Employees.xlsx", sheet = 2)
+str(sht1)
+```
+
+
+```{r}
+library(DBI)
+library(RMySQL)
+```
+
+```{r}
+host <- "courses.csrrinzqubik.us-east-1.rds.amazonaws.com"
+connect <- dbConnect(RMySQL::MySQL(), dbname = "tweater", host = host, port = 3306, user = "student", password = 'datacamp')
+```
+
+```{r}
+tables <- dbListTables(connect)
+tables 
+```
+```{r}
+user_t <- dbReadTable(connect, "users")
+user_t
+```
+
+```{r}
+View(user_t)
+```
+
+```{r}
+write.csv(user_t, file = "users.csv")
+```
+
+```{r}
+write.table(user_t, file = "users.txt", sep = "\t")
+```
+
+```{r}
+?write.csv
+```
+
+```{r}
+library(haven)
+```
+
+```{r}
+birth <- read_sas(file.choose())
+str(birth)
+```
+
+
+```{r}
+View(birth)
+```
+
+```{r}
+ach<- read_dta("data/alcohol.dta")
+str(ach)
+```
+
+```{r}
+hs<-read.csv(file.choose(), header=T)
+```
+
+```{r}
+plot(hs$Bathrooms, hs$Price, main="Relationship between Price and Bathrooms",xlab="Number of bathrooms", ylab="Price of the House")
+```
+
+```{r}
+plot(hs$Bathrooms, hs$Price, main="Relationship between Price and Bathrooms",xlab="Number of bathrooms", ylab="Price of the House")
+```
+
+
+```{r}
+tweat_t <- dbReadTable(connect, "tweats")
+str(tweat_t)
+```
+
+```{r}
+library(DBI)
+```
+
+```{r}
+library(RMySQL)
+```
+
+```{r}
+#host <- "courses.csrrinzqubik.us-east-1.rds.amazonaws.com"
+connect <- dbConnect(RMySQL::MySQL(), dbname = "cape_codd", host = "localhost", port = 3306, user = "root", password = '@mic2019DB$$')
+```
+
+```{r}
+buyer_t <- dbReadTable(connect, "buyer")
+str(buyer_t)
+```
+
+
+```{r}
+hs<-read.csv("data/house.csv", header=T)
+```
+
+```{r}
+boxplot(Price~Status, data= hs,  main="Boxplot of Price based on Status", xlab= "Status of House", ylab="Price of House")
+
+```
+
+```{r}
+
+f<- read.csv("data/examples.csv", header = T)
+```
+
+```{r}
+str(f)
+
+
+```
+
+```{r}
+
+ f$Status<- as.factor(f$Status)
+f
+```
+```{r}
+View(f)
+```
