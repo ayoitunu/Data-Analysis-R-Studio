@@ -1,0 +1,72 @@
+---
+title: "Inferential Statistics"
+author: "Emmanuel Akinbode"
+date: "10/30/2019"
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
+---
+
+```{r}
+dt<-read.csv("data/diamond.csv", header=T)
+t.test(dt$price,mu=3000)
+```
+
+```{r}
+ct<-read.csv(file.choose(), header=T)
+t.test(ct$area_se~ct$diagnosis, alternative="two.sided")
+ct
+```
+
+```{r}
+x<-c(239, 170, 182, 143, 141, 170, 160, 154, 185, 130)
+y<-c(362,343, 330, 340, 314, 567, 292, 439, 312, 2920)
+paired_1<-t.test(x,y, paired=TRUE)
+paired_1
+```
+
+#Exercise
+
+#1.
+# Ho: mu = 0.4
+# H1: mu > 0.4
+# Level of significance : 0.05
+
+
+```{r}
+dt<-read.csv("data/diamond.csv", header=T)
+t.test(dt$carat,mu=0.4, alternative = "greater")
+```
+#Conclusion:
+# We reject Ho because our p-value is less than our level of significance, our mean is greater than 0.4
+
+
+
+#Question 2
+#1.
+# Ho: Um = Ub
+# H1: Um != Ub
+# Level of significance : 0.05
+
+```{r}
+cev<-read.csv(file.choose(), header=T)
+t.test(cev$area_worst~cev$diagnosis, alternative="two.sided")
+```
+#Conclusion:
+We reject Ho because our p-value is less than our level of significance and it shows a difference between the mean of area_worst and diagnosis.
+
+
+
+#Question 3
+Ho: Before = After
+H1: Before != After
+Level of Significance: 0.05
+
+```{r}
+before<-c(80,45,78,89,80,90,91,89,56,78,89,81)
+after<-c(61,71,62,78,88,71,78,79,67,66,78,79)
+tumor<-t.test(before, after, paired = TRUE)
+tumor
+```
+Conclusion: We accept Ho because our p-value is greater than our level of significance, showing there is no difference before and after the tumor
