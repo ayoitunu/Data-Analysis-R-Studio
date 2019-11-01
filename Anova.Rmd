@@ -1,0 +1,88 @@
+---
+title: "Contingency Test"
+author: "Emmanuel Akinbode"
+date: "11/1/2019"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r}
+ gender<-c("Male","Female","Male","Female","Male","Female","Male","Female","Male","Female")
+```
+
+```{r}
+drink<-c("chocolate","strawberry","strawberry","strawberry","chocolate","chocolate","chocolate","strawberry","strawberry","strawberry")
+```
+
+```{r}
+dt<-data.frame(gender,drink)
+dt
+```
+
+```{r}
+ dt1<-table(dt)
+dt1
+```
+
+```{r}
+chisq.test(dt1)
+```
+
+```{r}
+library(MASS)
+data("survey")
+survey
+```
+
+```{r}
+ t1<-table(survey$Exer, survey$Smoke)
+t1
+```
+
+```{r}
+write.csv(t1, file="t1.csv")
+```
+
+```{r}
+chisq.test(t1)
+```
+
+```{r}
+cht<-read.csv(file.choose(), header=T)
+chisq.test(cht$color,cht$clarity)
+```
+
+#One-way Anova
+```{r}
+a1<- aov(cht$price~cht$color)
+summary(a1)
+```
+
+```{r}
+a1
+TukeyHSD(a1)
+```
+
+```{r}
+data("iris")
+View(iris)
+
+```
+
+```{r}
+levels(iris$Species)
+```
+
+#Ho: There is no difference
+H1: There is difference
+
+```{r}
+a2<- aov(iris$Sepal.Length~iris$Species)
+summary(a2)
+```
+
+```{r}
+a2
+TukeyHSD(a2)
+```
